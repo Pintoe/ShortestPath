@@ -19,10 +19,12 @@ public:
 	sf::Vector2i& correctVector(sf::Vector2i&);
 
 	sf::Vector2i getCurrentPosition();
-	sf::CircleShape m_nodeShape;
 private:
 	sf::Vector2i m_currentPosition;
-	// sf::CircleShape m_nodeShape;
+	sf::CircleShape m_nodeShape;
+
+	bool m_positionChangedFlag;
+	friend class AdjacencyMatrix;
 };
 
 namespace NodeShapeUtilities

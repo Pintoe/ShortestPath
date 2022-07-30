@@ -14,6 +14,8 @@ Node::Node(sf::Vector2i currentPosition, bool correctVector=false)
 {
 	// this->m_currentPosition = correctVector ? this->correctVector(currentPosition) : currentPosition;
 
+	this->m_positionChangedFlag = false;
+
 	this->m_currentPosition = currentPosition;
 
 	this->m_nodeShape.setOrigin(sf::Vector2f(NodeShapeProperties::RADIUS, NodeShapeProperties::RADIUS));
@@ -25,12 +27,13 @@ void Node::draw(sf::RenderWindow& renderWindow)
 {
 	sf::CircleShape copyOfNodeShape = this->m_nodeShape;
 	copyOfNodeShape.setPosition(renderWindow.mapPixelToCoords(this->m_currentPosition));
-	
+
 	renderWindow.draw(copyOfNodeShape);
 }
 
 void Node::setCurrentPosition(sf::Vector2i newPosition)
 {
+	this->m_positionChangedFlag = true;
 	this->m_currentPosition = newPosition;
 }
 

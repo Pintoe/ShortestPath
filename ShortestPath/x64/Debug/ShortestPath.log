@@ -1,2 +1,12 @@
 ﻿  main.cpp
+C:\Users\darre\Documents\Code\C++\SFML\ShortestPath\ShortestPath\main.cpp(61,48): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+C:\Users\darre\Documents\Code\C++\SFML\ShortestPath\ShortestPath\main.cpp(61,42): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
   ShortestPath.vcxproj -> C:\Users\darre\Documents\Code\C++\SFML\ShortestPath\ShortestPath\x64\Debug\ShortestPath.exe

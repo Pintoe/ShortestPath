@@ -19,4 +19,12 @@ namespace MathHelper
 		inline double getVectorMagnitude(sf::Vector2i currentVector) { return std::hypot(currentVector.x, currentVector.y); }
 	}
 
+	namespace Planar
+	{
+		template<typename T>
+		inline T clamp(T lowerBound, T higherBound, T value) { return std::min(std::max(lowerBound, value), higherBound); }
+		
+		
+		// inline sf::Vector2i clampVector(sf::Vector2i lowerBound, sf::Vector2i higherBound) { return}
+	}
 }

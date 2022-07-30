@@ -22,7 +22,7 @@ void LineShape::updateFillColor()
 {
     sf::Color newFillColor(LineShapeProperties::FILL_COLOR);
     double percentFullVector = MathHelper::LinearAlgebra::getVectorMagnitude(this->m_startVector - this->m_targetVector) / GET_DIAGONAL_LENGTH();
-    newFillColor.a = (1 - percentFullVector) * 255;
+    newFillColor.a = std::min((1 - percentFullVector), (double) 1) * 255 * TRANSPARENCY_CONSTANT;
 
     
     this->setFillColor(newFillColor);

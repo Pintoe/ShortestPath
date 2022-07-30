@@ -9,7 +9,7 @@
 #include "globals.h"
 #include "math.h"
 
-int getCollidingNodesFromClick(sf::Vector2i mouseClickPosition, AdjacencyMatrix visibleNodesMatrix)
+int getCollidingNodesFromClick(sf::Vector2i mouseClickPosition, AdjacencyMatrix& visibleNodesMatrix)
 {
 	for (int currentNodeIndex = 0; currentNodeIndex < visibleNodesMatrix.size; currentNodeIndex++)
 	{
@@ -27,22 +27,8 @@ int getCollidingNodesFromClick(sf::Vector2i mouseClickPosition, AdjacencyMatrix 
 	return -1;
 }
 
-struct connectingLine
-{
-
-	LineShape line;
-	int startPointIndex;
-	int endPointIndex;
-
-	connectingLine(LineShape line, int startPointIndex, int endPointIndex) : line(line),
-		startPointIndex(startPointIndex),
-		endPointIndex(endPointIndex)
-	{}
-};
-
 int main()
 {
-	const double CONNECTION_THICKNESS = 10;
 	const sf::Mouse::Button NODE_MOVEMENT_BUTTON = sf::Mouse::Button::Left;
 	const sf::Mouse::Button NODE_CONNECTION_BUTTION = sf::Mouse::Button::Right;
 
@@ -50,7 +36,6 @@ int main()
 	renderWindow.setFramerateLimit(144);
 
 	// std::vector<Node> visibleNodes;
-	std::vector<connectingLine> nodeConnections;
 
 	sf::Vector2i lastMousePosition(0, 0);
 	
@@ -62,9 +47,36 @@ int main()
 	int startConnectionNodeIndex = -1;
 	bool currentlyCreatingConnection = false;
 
+	bool queueAllConnectionCreate = false;
+
 	sf::Clock framesPerSecondClock;
 	double lastFrameTime = 0;
 
+	for (int i = 0; i < 100; i++)
+	{
+		double xPos = rand() % SCREEN_WIDTH;
+		double yPos = rand() % SCREEN_HEIGHT;
+
+		// std::cout << xPos << std::endl;
+		Node* pNewNode = new Node(sf::Vector2i(xPos, yPos), true);
+		// visibleNodes.push_back(*pNewNode);
+		visibleNodesMatrix.addVertex(pNewNode);
+	}
+
+	queueAllConnectionCreate = false;
+	for (int i = 0; i < visibleNodesMatrix.size; i++)
+	{
+		Node* currentNode = visibleNodesMatrix.getNodePointerFromKey(i);
+
+		for (int j = 0; j < visibleNodesMatrix.size; j++)
+		{
+			Node* currentNode2 = visibleNodesMatrix.getNodePointerFromKey(j);
+			if (i != j)
+			{
+				visibleNodesMatrix.addEdge(i, j);
+			}
+		}
+	}
     while (renderWindow.isOpen())
     {
 		sf::Vector2i currentMousePosition = sf::Mouse::getPosition(renderWindow);
@@ -95,13 +107,33 @@ int main()
 				case sf::Keyboard::P:
 					std::cout << visibleNodesMatrix << std::endl;
 					break;
-				}
-				break;
+				case sf::Keyboard::R:
+					queueAllConnectionCreate = true;
+					break;
+				}	
+			break;
 			default:
 				break;
 			}
 		}
 
+		if (queueAllConnectionCreate)
+		{
+			queueAllConnectionCreate = false;
+			for (int i = 0; i < visibleNodesMatrix.size; i++)
+			{
+				Node* currentNode = visibleNodesMatrix.getNodePointerFromKey(i);
+
+				for (int j = 0; j < visibleNodesMatrix.size; j++)
+				{
+					Node* currentNode2 = visibleNodesMatrix.getNodePointerFromKey(j);
+					if (i != j)
+					{
+						visibleNodesMatrix.addEdge(i, j);
+					}
+				}
+			}
+		}
 		if (leftClickHeldDown && sf::Mouse::isButtonPressed(NODE_MOVEMENT_BUTTON))
 		{
 			// visibleNodes[movementNodeIndex].setCurrentPosition(currentMousePosition);
@@ -153,11 +185,7 @@ int main()
 
 					visibleNodesMatrix.addEdge(
 						startConnectionNodeIndex,
-						endConnectionNodeIndex,
-						NodeShapeUtilities::distanceBetweenTwoNodes(
-							*visibleNodesMatrix.getNodePointerFromKey(startConnectionNodeIndex),
-							*visibleNodesMatrix.getNodePointerFromKey(endConnectionNodeIndex)
-						)
+						endConnectionNodeIndex
 					);
 				}
 			}
@@ -196,38 +224,40 @@ int main()
 		//	renderWindow.draw(currentLine);
 		//}
 
-		int currentStartColumnIndex = 0;
+		// int currentStartColumnIndex = 0;
 
-		for (int currentRowIndex = 0; currentRowIndex < visibleNodesMatrix.size; currentRowIndex++)
-		{
+		//for (int currentRowIndex = 0; currentRowIndex < visibleNodesMatrix.size; currentRowIndex++)
+		//{
 
-			Node* currentRowNode = visibleNodesMatrix.getNodePointerFromKey(currentRowIndex);
+		//	Node* currentRowNode = visibleNodesMatrix.getNodePointerFromKey(currentRowIndex);
 
-			currentRowNode->draw(renderWindow);
+		//	currentRowNode->draw(renderWindow);
 
-			for (int currentColumnIndex = currentStartColumnIndex; currentColumnIndex < visibleNodesMatrix.size; currentColumnIndex++)
-			{
+		//	for (int currentColumnIndex = currentStartColumnIndex; currentColumnIndex < visibleNodesMatrix.size; currentColumnIndex++)
+		//	{
 
-				double currentConnectionWeight = visibleNodesMatrix.getWeightFromKey(currentRowIndex, currentColumnIndex);
+		//		double currentConnectionWeight = visibleNodesMatrix.getWeightFromKey(currentRowIndex, currentColumnIndex);
 
-				if (currentConnectionWeight != 0)
-				{
-					LineShape connectingLine(
-						sf::Vector2f(currentRowNode->getCurrentPosition()),
-						sf::Vector2f(visibleNodesMatrix.getNodePointerFromKey(currentColumnIndex)->getCurrentPosition()),
-						true,
-						10
-					);
+		//		//if (currentConnectionWeight != 0)
+		//		//{
+		//			LineShape connectingLine(
+		//				sf::Vector2f(currentRowNode->getCurrentPosition()),
+		//				sf::Vector2f(visibleNodesMatrix.getNodePointerFromKey(currentColumnIndex)->getCurrentPosition()),
+		//				true,
+		//				10
+		//			);
 
-					 renderWindow.draw(connectingLine);
-				}
-			}
-		}
+		//			renderWindow.draw(connectingLine);
+		//		// }
+		//	}
+		//}
 		
+
+		visibleNodesMatrix.drawConnections(renderWindow);
 
 		renderWindow.display();
 
-		lastMousePosition = currentMousePosition;
+  		lastMousePosition = currentMousePosition;
 
 		double currentFrameTime = framesPerSecondClock.getElapsedTime().asSeconds();
 
@@ -242,5 +272,9 @@ int main()
 
     }
 
-    return 0;
+	{
+		int a;
+		std::cin >> a;
+	}
+	return 0;
 }
