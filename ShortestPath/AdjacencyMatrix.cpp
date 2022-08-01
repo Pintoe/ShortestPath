@@ -42,7 +42,7 @@ void AdjacencyMatrix::addEdge(Node* pNode1, Node* pNode2)
 	{
 		double differenceInPosition = MathHelper::LinearAlgebra::getVectorMagnitude(pNode1->getCurrentPosition() - pNode2->getCurrentPosition());
 		
-		AdjacencyMatrixNode* weightNode1 = new AdjacencyMatrixNode(
+		AdjacencyMatrixNode* pWeightNode1 = new AdjacencyMatrixNode(
 			differenceInPosition,
 			new LineShape(
 				sf::Vector2f(pNode1->getCurrentPosition()),
@@ -52,7 +52,7 @@ void AdjacencyMatrix::addEdge(Node* pNode1, Node* pNode2)
 			)
 		);
 
-		AdjacencyMatrixNode* weightNode2 = new AdjacencyMatrixNode(
+		AdjacencyMatrixNode* pWeightNode2 = new AdjacencyMatrixNode(
 			differenceInPosition,
 			new LineShape(
 				sf::Vector2f(pNode2->getCurrentPosition()),
@@ -65,8 +65,8 @@ void AdjacencyMatrix::addEdge(Node* pNode1, Node* pNode2)
 		delete this->m_matrix[indexToFirstNode][indexToSecondNode];
 		delete this->m_matrix[indexToSecondNode][indexToFirstNode];
 
-		this->m_matrix[indexToFirstNode][indexToSecondNode] = weightNode1;
-		this->m_matrix[indexToSecondNode][indexToFirstNode] = weightNode2;
+		this->m_matrix[indexToFirstNode][indexToSecondNode] = pWeightNode1;
+		this->m_matrix[indexToSecondNode][indexToFirstNode] = pWeightNode2;
 	}
 }
 
@@ -82,13 +82,12 @@ void AdjacencyMatrix::drawConnections(sf::RenderWindow& renderWindow)
 	for (int currentRowIndex = 0; currentRowIndex < this->size; currentRowIndex++)
 	{
 
-		Node* currentRowNode = this->getNodePointerFromKey(currentRowIndex);
+		Node* pCurrentRowNode = this->getNodePointerFromKey(currentRowIndex);
 
-		currentRowNode->draw(renderWindow);
 
-		if (currentRowNode->m_positionChangedFlag)
+		if (pCurrentRowNode->m_positionChangedFlag)
 		{
-			currentRowNode->m_positionChangedFlag = false;
+			pCurrentRowNode->m_positionChangedFlag = false;
 
 			for (int currentColumnIndex = 0; currentColumnIndex < this->size; currentColumnIndex++)
 			{
@@ -99,16 +98,20 @@ void AdjacencyMatrix::drawConnections(sf::RenderWindow& renderWindow)
 				}
 			}
 		}
+
 		for (int currentColumnIndex = currentStartColumnIndex; currentColumnIndex < this->size; currentColumnIndex++)
 		{
 
-			AdjacencyMatrixNode* currentConnectionNode = this->m_matrix[currentRowIndex][currentColumnIndex];
+			AdjacencyMatrixNode* pCurrentConnectionNode = this->m_matrix[currentRowIndex][currentColumnIndex];
 
-			if (currentConnectionNode->getWeight())
+			if (pCurrentConnectionNode->getWeight())
 			{
-				renderWindow.draw(*currentConnectionNode->getConnectingLine());
+				renderWindow.draw(*pCurrentConnectionNode->getConnectingLine());
 			}
 		 }
+
+		pCurrentRowNode->draw(renderWindow);
+
 		currentStartColumnIndex++;
 	}
 }
@@ -149,9 +152,9 @@ std::ostream& operator<<(std::ostream& os, const AdjacencyMatrix& currentMatrix)
 
 AdjacencyMatrix::~AdjacencyMatrix()
 {
-	for (Node* currentNode : this->m_pointerToNodes)
+	for (Node* pCurrentNode : this->m_pointerToNodes)
 	{
-		delete currentNode;
+		delete pCurrentNode;
 	}
 
 	for (std::vector<AdjacencyMatrixNode*>& currentRow : this->m_matrix)

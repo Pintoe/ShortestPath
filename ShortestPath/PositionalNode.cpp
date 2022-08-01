@@ -3,11 +3,12 @@
 #include "PositionalNode.h"
 #include "math.h"
 
+const sf::Vector2i g_LOWER_BOUND_VECTOR = sf::Vector2i(0, 0);
+const sf::Vector2i g_HIGHER_BOUND_VECTOR = sf::Vector2i(SCREEN_WIDTH, SCREEN_HEIGHT);
+
 double NodeShapeUtilities::distanceBetweenTwoNodes(Node& startNode, Node& endNode)
 {
-	sf::Vector2f distanceBetweenVectors = sf::Vector2f(startNode.getCurrentPosition() - endNode.getCurrentPosition());
-
-	return MathHelper::LinearAlgebra::getVectorMagnitude(distanceBetweenVectors);
+	return MathHelper::LinearAlgebra::getVectorMagnitude(startNode.getCurrentPosition() - endNode.getCurrentPosition());
 }
 
 Node::Node(sf::Vector2i currentPosition, bool correctVector=false)
@@ -26,7 +27,11 @@ Node::Node(sf::Vector2i currentPosition, bool correctVector=false)
 void Node::draw(sf::RenderWindow& renderWindow)
 {
 	sf::CircleShape copyOfNodeShape = this->m_nodeShape;
-	copyOfNodeShape.setPosition(renderWindow.mapPixelToCoords(this->m_currentPosition));
+	copyOfNodeShape.setPosition(
+		renderWindow.mapPixelToCoords(
+			this->m_currentPosition
+		)
+	);
 
 	renderWindow.draw(copyOfNodeShape);
 }
@@ -34,14 +39,11 @@ void Node::draw(sf::RenderWindow& renderWindow)
 void Node::setCurrentPosition(sf::Vector2i newPosition)
 {
 	this->m_positionChangedFlag = true;
-	this->m_currentPosition = newPosition;
-}
-
-sf::Vector2i& Node::correctVector(sf::Vector2i& oldVector)
-{
-	// oldVector = oldVector - sf::Vector2i(NodeShapeProperties::RADIUS, NodeShapeProperties::RADIUS);
-
-	return oldVector;
+	this->m_currentPosition = MathHelper::Planar::clampVector(
+		g_LOWER_BOUND_VECTOR,
+		g_HIGHER_BOUND_VECTOR,
+		newPosition
+	);
 }
 
 sf::Vector2i Node::getCurrentPosition()

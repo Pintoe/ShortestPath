@@ -50,7 +50,9 @@ int main()
 	bool queueAllConnectionCreate = false;
 
 	sf::Clock framesPerSecondClock;
-	double lastFrameTime = 0;
+	
+	double lastFPSPrintTime = 0;
+	int framesPassed = 0;
 
 	for (int i = 0; i < 100; i++)
 	{
@@ -209,7 +211,7 @@ int main()
 				)
 			);
 			
-			std::cout << "Line Position: (" << linePosition.x << ", " << linePosition.y << ") Target Position: (" << targetLinePosition.x << ", " << targetLinePosition.y << ")" << std::endl;
+			// std::cout << "Line Position: (" << linePosition.x << ", " << linePosition.y << ") Target Position: (" << targetLinePosition.x << ", " << targetLinePosition.y << ")" << std::endl;
 		}
 
 		//for (int currentLineIndex = 0; currentLineIndex < nodeConnections.size(); currentLineIndex++)
@@ -254,27 +256,25 @@ int main()
 		
 
 		visibleNodesMatrix.drawConnections(renderWindow);
-
 		renderWindow.display();
 
   		lastMousePosition = currentMousePosition;
+		framesPassed = framesPassed + 1;
 
 		double currentFrameTime = framesPerSecondClock.getElapsedTime().asSeconds();
+		
+		if (currentFrameTime - lastFPSPrintTime > 1)
+		{
+			std::cout << "FPS: " << framesPassed << std::endl;
 
+			framesPassed = 0;
+			lastFPSPrintTime = currentFrameTime;
+		}
 
-		double fps = 1 / (currentFrameTime - lastFrameTime);
-
-		std::cout << "FPS: " << fps << " LastTime: " << lastFrameTime << " CurrentTime: " << currentFrameTime << std::endl;
-
-		lastFrameTime = currentFrameTime;
 
 
 
     }
 
-	{
-		int a;
-		std::cin >> a;
-	}
 	return 0;
 }

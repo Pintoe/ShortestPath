@@ -25,11 +25,10 @@ public:
 	void setStartVector(sf::Vector2f);
 
 private:
-
-	sf::RectangleShape m_rectangleRepresentation;
-
 	sf::Vector2f m_targetVector;
 	sf::Vector2f m_startVector;
+
+	sf::Vector2f m_vertexPositions[4];
 
 	double m_thickness;
 };

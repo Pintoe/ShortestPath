@@ -1,17 +1,5 @@
-﻿  main.cpp
-C:\Users\darre\Documents\Code\C++\SFML\ShortestPath\ShortestPath\main.cpp(61,48): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
-          with
-          [
-              T=int
-          ]
-C:\Users\darre\Documents\Code\C++\SFML\ShortestPath\ShortestPath\main.cpp(61,42): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
-          with
-          [
-              T=int
-          ]
-  Generating code
-  1 of 331 functions ( 0.3%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
-  Finished generating code
-  ShortestPath.vcxproj -> C:\Users\darre\Documents\Code\C++\SFML\ShortestPath\ShortestPath\x64\Release\ShortestPath.exe
+﻿  PositionalNode.cpp
+C:\Users\darre\Documents\Code\C++\SFML\ShortestPath\ShortestPath\PositionalNode.cpp(6,61): error C2440: 'initializing': cannot convert from 'sf::Vector2f' to 'sf::Vector2<int>'
+C:\Users\darre\Documents\Code\C++\SFML\ShortestPath\ShortestPath\PositionalNode.cpp(6,41): message : No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+C:\Users\darre\Documents\Code\C++\SFML\ShortestPath\ShortestPath\PositionalNode.cpp(7,85): error C2440: 'initializing': cannot convert from 'sf::Vector2f' to 'sf::Vector2<int>'
+C:\Users\darre\Documents\Code\C++\SFML\ShortestPath\ShortestPath\PositionalNode.cpp(7,42): message : No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called

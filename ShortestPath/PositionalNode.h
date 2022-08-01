@@ -16,8 +16,6 @@ public:
 
 	void setCurrentPosition(sf::Vector2i);
 
-	sf::Vector2i& correctVector(sf::Vector2i&);
-
 	sf::Vector2i getCurrentPosition();
 private:
 	sf::Vector2i m_currentPosition;
