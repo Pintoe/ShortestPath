@@ -39,13 +39,16 @@ public:
 
 	void drawConnections(sf::RenderWindow&);
 
-	double getWeightFromKey(int index1, int index2);
-	Node* getNodePointerFromKey(int index);
+	double getWeightFromKey(int, int);
+	Node* getNodePointerFromKey(int);
+
+	void setStartNode(Node*);
 
 	friend std::ostream& operator<<(std::ostream&, const AdjacencyMatrix&);
 
 	~AdjacencyMatrix();
 private:
+	Node* m_pStartNode;
 	std::vector<std::vector<AdjacencyMatrixNode*>> m_matrix;
 	std::vector<Node*> m_pointerToNodes;
 };

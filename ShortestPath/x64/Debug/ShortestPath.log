@@ -1,31 +1,4 @@
 ﻿  AdjacencyMatrix.cpp
-  LineShape.cpp
-C:\Users\darre\Documents\Code\C++\SFML\ShortestPath\ShortestPath\LineShape.cpp(24,74): warning C4244: '=': conversion from '_Ty' to 'sf::Uint8', possible loss of data
-          with
-          [
-              _Ty=double
-          ]
-C:\Users\darre\Documents\Code\C++\SFML\ShortestPath\ShortestPath\LineShape.cpp(88,30): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\darre\Documents\Code\C++\SFML\ShortestPath\ShortestPath\LineShape.cpp(87,30): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\darre\Documents\Code\C++\SFML\ShortestPath\ShortestPath\LineShape.cpp(93,30): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-C:\Users\darre\Documents\Code\C++\SFML\ShortestPath\ShortestPath\LineShape.cpp(92,30): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
-          with
-          [
-              T=float
-          ]
-  PositionalNode.cpp
   main.cpp
 C:\Users\darre\Documents\Code\C++\SFML\ShortestPath\ShortestPath\main.cpp(63,48): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
           with
@@ -37,6 +10,5 @@ C:\Users\darre\Documents\Code\C++\SFML\ShortestPath\ShortestPath\main.cpp(63,42)
           [
               T=int
           ]
-  math.cpp
   Generating Code...
   ShortestPath.vcxproj -> C:\Users\darre\Documents\Code\C++\SFML\ShortestPath\ShortestPath\x64\Debug\ShortestPath.exe

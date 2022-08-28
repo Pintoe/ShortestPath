@@ -1,7 +1,7 @@
 #include "AdjacencyMatrix.h"
 #include "math.h"
 
-AdjacencyMatrix::AdjacencyMatrix() : size(0) {}
+AdjacencyMatrix::AdjacencyMatrix() : size(0), m_pStartNode(nullptr) {}
 
 void AdjacencyMatrix::addVertex(Node* pNodeToAdd)
 {
@@ -124,6 +124,11 @@ Node* AdjacencyMatrix::getNodePointerFromKey(int index)
 double AdjacencyMatrix::getWeightFromKey(int index1, int index2)
 {
 	return this->m_matrix[index1][index2]->getWeight();
+}
+
+void AdjacencyMatrix::setStartNode(Node* pNode)
+{
+	this->m_pStartNode = pNode;
 }
 
 std::ostream& operator<<(std::ostream& os, const AdjacencyMatrix& currentMatrix)

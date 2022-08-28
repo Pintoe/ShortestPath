@@ -1,5 +1,46 @@
-﻿  PositionalNode.cpp
-C:\Users\darre\Documents\Code\C++\SFML\ShortestPath\ShortestPath\PositionalNode.cpp(6,61): error C2440: 'initializing': cannot convert from 'sf::Vector2f' to 'sf::Vector2<int>'
-C:\Users\darre\Documents\Code\C++\SFML\ShortestPath\ShortestPath\PositionalNode.cpp(6,41): message : No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
-C:\Users\darre\Documents\Code\C++\SFML\ShortestPath\ShortestPath\PositionalNode.cpp(7,85): error C2440: 'initializing': cannot convert from 'sf::Vector2f' to 'sf::Vector2<int>'
-C:\Users\darre\Documents\Code\C++\SFML\ShortestPath\ShortestPath\PositionalNode.cpp(7,42): message : No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+﻿  AdjacencyMatrix.cpp
+  math.cpp
+  LineShape.cpp
+C:\Users\darre\Documents\Code\C++\SFML\ShortestPath\ShortestPath\LineShape.cpp(24,74): warning C4244: '=': conversion from '_Ty' to 'sf::Uint8', possible loss of data
+          with
+          [
+              _Ty=double
+          ]
+C:\Users\darre\Documents\Code\C++\SFML\ShortestPath\ShortestPath\LineShape.cpp(88,30): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\darre\Documents\Code\C++\SFML\ShortestPath\ShortestPath\LineShape.cpp(87,30): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\darre\Documents\Code\C++\SFML\ShortestPath\ShortestPath\LineShape.cpp(93,30): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\darre\Documents\Code\C++\SFML\ShortestPath\ShortestPath\LineShape.cpp(92,30): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+  main.cpp
+C:\Users\darre\Documents\Code\C++\SFML\ShortestPath\ShortestPath\main.cpp(63,48): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+C:\Users\darre\Documents\Code\C++\SFML\ShortestPath\ShortestPath\main.cpp(63,42): warning C4244: 'argument': conversion from 'double' to 'T', possible loss of data
+          with
+          [
+              T=int
+          ]
+  PositionalNode.cpp
+  Generating code
+  48 of 337 functions (14.2%) were compiled, the rest were copied from previous compilation.
+    6 functions were new in current compilation
+    11 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  ShortestPath.vcxproj -> C:\Users\darre\Documents\Code\C++\SFML\ShortestPath\ShortestPath\x64\Release\ShortestPath.exe
